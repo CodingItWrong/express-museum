@@ -1,8 +1,8 @@
-service: my-express-application
+service: express-museum
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs10.x
   stage: dev
   region: us-east-1
 
@@ -12,3 +12,5 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+    environment:
+      MONGODB_URI: 'mongodb://example.com/express-museum'
