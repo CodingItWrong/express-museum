@@ -5,6 +5,7 @@
   "author": "Josh Justice <me@joshjustice.com>",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon index.js",
     "lint": "eslint *.js"
   },
   "devDependencies": {
@@ -12,6 +13,10 @@
     "eslint-config-codingitwrong": "^0.1.4",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
