@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "apollo-server-express": "^2.8.1",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "graphql": "^14.4.2",
     "jsonapi-serializer": "^3.6.4",

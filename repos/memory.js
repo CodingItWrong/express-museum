@@ -1,10 +1,17 @@
+let nextId = 1
+
 const restaurants = [
-  { id: 1, name: 'Sushi Place' },
-  { id: 2, name: 'Burger Place' },
+  { id: nextId++, name: 'Sushi Place' },
+  { id: nextId++, name: 'Burger Place' },
 ]
 
 const repo = {
   all: () => Promise.resolve(restaurants),
+  create: fields => {
+    const restaurant = Object.assign({ id: nextId++ }, fields)
+    restaurants.push(restaurant)
+    return Promise.resolve(restaurant)
+  },
 }
 
 module.exports = repo
