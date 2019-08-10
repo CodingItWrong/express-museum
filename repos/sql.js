@@ -4,6 +4,7 @@ const { Restaurant } = db
 
 const repo = {
   all: () => Restaurant.findAll(),
+  create: fields => Restaurant.create(fields),
 }
 
 module.exports = repo
