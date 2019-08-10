@@ -1,18 +1,8 @@
 const express = require('express')
-
-const restaurants = [
-  { id: 1, name: 'Sushi Place' },
-  { id: 2, name: 'Burger Place' },
-]
+const restMemoryRouter = require('./routes/restMemory')
 
 let app = express()
 
-const getRestaurantsRoute = (req, res) => {
-  res.send(restaurants)
-}
-
-const router = express.Router()
-router.get('/restaurants', getRestaurantsRoute)
-app.use(router)
+app.use('/rest-memory', restMemoryRouter)
 
 app.listen(3000)
