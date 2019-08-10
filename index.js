@@ -6,15 +6,13 @@ const restaurants = [
 ]
 
 let app = express()
-app.use((req, res) => {
-  let route = `${req.method} ${req.url}`
 
-  if (route == 'GET /restaurants') {
-    res.send(restaurants)
-  } else {
-    res.status(404)
-    res.send('404 Not Found')
-  }
-})
+const getRestaurantsRoute = (req, res) => {
+  res.send(restaurants)
+}
+
+const router = express.Router()
+router.get('/restaurants', getRestaurantsRoute)
+app.use(router)
 
 app.listen(3000)
