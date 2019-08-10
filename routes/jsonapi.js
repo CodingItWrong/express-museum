@@ -1,9 +1,11 @@
 const express = require('express')
-const JSONAPISerializer = require('jsonapi-serializer').Serializer
+const bodyParser = require('body-parser')
+const { Serializer, Deserializer } = require('jsonapi-serializer')
 
-const restaurantSerializer = new JSONAPISerializer('restaurants', {
+const restaurantSerializer = new Serializer('restaurants', {
   attributes: ['name'],
 })
+const restaurantDeserializer = new Deserializer()
 
 const factory = repo => {
   const getRestaurantsRoute = (req, res) => {
@@ -12,8 +14,21 @@ const factory = repo => {
     })
   }
 
+  const createRestaurantsRoute = (req, res) => {
+    restaurantDeserializer
+      .deserialize(req.body)
+      .then(fields => repo.create(fields))
+      .then(restaurant => {
+        res.status(201)
+        res.send(restaurantSerializer.serialize(restaurant))
+      })
+  }
+
   const router = express.Router()
-  router.get('/restaurants', getRestaurantsRoute)
+  router
+    .route('/restaurants')
+    .get(getRestaurantsRoute)
+    .post(bodyParser.json(), createRestaurantsRoute)
 
   return router
 }
