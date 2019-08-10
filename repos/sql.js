@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize')
+const db = require('../models')
+const { Restaurant } = db
 
-const sequelize = new Sequelize('postgres://josh:@localhost:5432')
+const repo = {
+  all: () => Restaurant.findAll(),
+}
 
-const Restaurant = sequelize.define('restaurant', {
-  title: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-})
+module.exports = repo

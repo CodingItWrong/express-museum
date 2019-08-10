@@ -6,5 +6,6 @@ const sql = require('./repos/sql')
 let app = express()
 
 app.use('/rest-memory', rest(memory))
+app.use('/rest-sql', rest(sql))
 
 app.listen(3000)
