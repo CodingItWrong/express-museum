@@ -8,12 +8,19 @@ const typeDefs = gql`
   type Query {
     restaurants: [Restaurant]
   }
+
+  type Mutation {
+    createRestaurant(name: String): Restaurant
+  }
 `
 
 const factory = repo => {
   const resolvers = {
     Query: {
       restaurants: () => repo.all(),
+    },
+    Mutation: {
+      createRestaurant: (_, args) => repo.create(args),
     },
   }
 
