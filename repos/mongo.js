@@ -27,6 +27,7 @@ Restaurant.find()
 
 const repo = {
   all: () => Restaurant.find(),
+  create: fields => new Restaurant(fields).save(),
 }
 
 module.exports = repo
