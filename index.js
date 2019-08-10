@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express')
+const serverless = require('serverless-http')
 
 const rest = require('./routes/rest')
 const jsonapi = require('./routes/jsonapi')
@@ -26,5 +27,4 @@ graphql(memory).applyMiddleware({ app, path: '/graphql-memory' })
 graphql(sql).applyMiddleware({ app, path: '/graphql-sql' })
 graphql(mongo).applyMiddleware({ app, path: '/graphql-mongo' })
 
-const port = process.env.PORT || 80
-app.listen(port)
+module.exports.handler = serverless(app)
