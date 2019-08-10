@@ -22,6 +22,7 @@
     "apollo-server-express": "^2.8.1",
     "express": "^4.17.1",
     "graphql": "^14.4.2",
+    "jsonapi-serializer": "^3.6.4",
     "mongoose": "^5.6.9",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
