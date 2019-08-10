@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/express-museum', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
 })
 
