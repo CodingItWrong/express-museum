@@ -4,7 +4,7 @@ const restaurants = [
 ]
 
 const repo = {
-  all: () => restaurants,
+  all: () => Promise.resolve(restaurants),
 }
 
 module.exports = repo

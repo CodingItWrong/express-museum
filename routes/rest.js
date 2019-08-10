@@ -2,7 +2,9 @@ const express = require('express')
 
 const factory = repo => {
   const getRestaurantsRoute = (req, res) => {
-    res.send(repo.all())
+    repo.all().then(restaurants => {
+      res.send(restaurants)
+    })
   }
 
   const memoryRouter = express.Router()
