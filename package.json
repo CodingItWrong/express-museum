@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "sequelize": "sequelize",
-    "start": "nodemon index.js",
+    "start": "node index.js",
+    "watch": "nodemon index.js",
     "lint": "eslint *.js"
   },
   "devDependencies": {
