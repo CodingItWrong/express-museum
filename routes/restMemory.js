@@ -1,12 +1,8 @@
 const express = require('express')
-
-const restaurants = [
-  { id: 1, name: 'Sushi Place' },
-  { id: 2, name: 'Burger Place' },
-]
+const memoryRepo = require('../repos/memory')
 
 const getRestaurantsRoute = (req, res) => {
-  res.send(restaurants)
+  res.send(memoryRepo.all())
 }
 
 const restMemoryRouter = express.Router()
