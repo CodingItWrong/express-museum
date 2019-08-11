@@ -14,4 +14,6 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-CMD yarn start
+CMD bin/wait-for-it.sh postgres:5432 -- yarn sequelize db:migrate && \
+    yarn sequelize db:seed:all && \
+    yarn start

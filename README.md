@@ -27,6 +27,12 @@ $ yarn sequelize db:seed:all
 $ yarn watch
 ```
 
+### Running Locally in Docker
+
+```
+$ docker-compose up
+```
+
 ### Heroku
 
 ```sh
