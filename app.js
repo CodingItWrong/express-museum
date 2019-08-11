@@ -1,3 +1,9 @@
+// serverless build process errors out without this,
+// but it seems like it shouldn't be necessary
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const express = require('express')
 
 const rest = require('./routes/rest')
