@@ -1,4 +1,4 @@
-const app = require('./app')
+const httpServer = require('./app')
 
 const port = process.env.PORT || 80
-app.listen(port)
+httpServer.listen(port)
