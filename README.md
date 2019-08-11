@@ -19,7 +19,7 @@ Demonstrates various service layers, data layers, and deployment platforms in Ex
 ### Running Locally
 
 - Mongo: start a Mongo server locally, duplicate `.env.sample` to `.env`, and change `MONGODB_URI` if necessary.
-- Postgres: change the `development` values in `config/config.json` if necessary
+- Postgres: start a Postgres server locally, change the `development` values in `config/config.json` if necessary (your username probably isn't `josh`)
 
 ```sh
 $ yarn sequelize db:migrate
