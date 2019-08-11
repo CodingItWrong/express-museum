@@ -10,22 +10,23 @@ const rest = require('./routes/rest')
 const jsonapi = require('./routes/jsonapi')
 const graphql = require('./routes/graphql')
 
-const memory = require('./repos/memory')
-// const sql = require('./repos/sql')
-const mongo = require('./repos/mongo')
-
 let app = express()
 
+const memory = require('./repos/memory')
 app.use('/rest-memory', rest(memory))
-// app.use('/rest-sql', rest(sql))
-app.use('/rest-mongo', rest(mongo))
-
 app.use('/jsonapi-memory', jsonapi(memory))
-// app.use('/jsonapi-sql', jsonapi(sql))
-app.use('/jsonapi-mongo', jsonapi(mongo))
-
 graphql(memory).applyMiddleware({ app, path: '/graphql-memory' })
-// graphql(sql).applyMiddleware({ app, path: '/graphql-sql' })
+
+const mongo = require('./repos/mongo')
+app.use('/rest-mongo', rest(mongo))
+app.use('/jsonapi-mongo', jsonapi(mongo))
 graphql(mongo).applyMiddleware({ app, path: '/graphql-mongo' })
+
+if (!process.env.DISABLE_SQL) {
+  const sql = require('./repos/sql')
+  app.use('/rest-sql', rest(sql))
+  app.use('/jsonapi-sql', jsonapi(sql))
+  graphql(sql).applyMiddleware({ app, path: '/graphql-sql' })
+}
 
 module.exports = app
