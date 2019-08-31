@@ -26,12 +26,14 @@ app.use('/jsonapi-mongo', jsonapi(mongo))
 const graphqlMongo = graphql(mongo)
 graphqlMongo.applyMiddleware({ app, path: '/graphql-mongo' })
 
+let graphqlSql
 if (!process.env.DISABLE_SQL) {
   const sql = require('./repos/sql')
   app.use('/rest-sql', rest(sql))
   app.use('/jsonapi-sql', jsonapi(sql))
-  const graphqlSql = graphql(sql)
+  graphqlSql = graphql(sql)
   graphqlSql.applyMiddleware({ app, path: '/graphql-sql' })
+  graphqlSql.installSubscriptionHandlers(httpServer)
 }
 
-module.exports = httpServer
+module.exports = { httpServer, graphqlSql }

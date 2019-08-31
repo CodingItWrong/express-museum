@@ -1,4 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server-express')
+const { PubSub } = require('apollo-server')
+
+const pubsub = new PubSub()
 
 const typeDefs = gql`
   type Restaurant {
@@ -12,7 +15,13 @@ const typeDefs = gql`
   type Mutation {
     createRestaurant(name: String): Restaurant
   }
+
+  type Subscription {
+    restaurantAdded: Restaurant
+  }
 `
+
+const RESTAURANT_ADDED = 'RESTAURANT_ADDED'
 
 const factory = repo => {
   const resolvers = {
@@ -20,7 +29,18 @@ const factory = repo => {
       restaurants: () => repo.all(),
     },
     Mutation: {
-      createRestaurant: (_, args) => repo.create(args),
+      createRestaurant: (_, args) => {
+        pubsub.publish(RESTAURANT_ADDED, {
+          restaurantAdded: args,
+        })
+        repo.create(args)
+        return args
+      },
+    },
+    Subscription: {
+      restaurantAdded: {
+        subscribe: () => pubsub.asyncIterator([RESTAURANT_ADDED]),
+      },
     },
   }
 
